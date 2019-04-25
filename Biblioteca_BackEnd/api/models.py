@@ -16,7 +16,7 @@ class AMBU_Usuario (models.Model):
 class AMBU_Solicitud_Baja (models.Model):
     sbja_fecha_solicitud = models.DateField(auto_now=False)
     sbja_estado_solicitud = models.BooleanField(default=False)
-    sbja_usuario = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE, null=False)
+    sbja_usuario = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE, null=False, related_name='entidad_usuario')
 
 class AMBU_Activo (models.Model):
     act_descripcion = models.CharField(max_length=500)

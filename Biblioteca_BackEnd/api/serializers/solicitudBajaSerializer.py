@@ -1,9 +1,13 @@
 from rest_framework import serializers
-from Biblioteca_BackEnd.api.models import AMBU_Solicitud_Baja
+from Biblioteca_BackEnd.api.models import AMBU_Solicitud_Baja, AMBU_Usuario
 from .usuarioSerializer import usuarioSerializer
 
 class solicitudBajaSerializer(serializers.ModelSerializer):
-    sbja_usuarioEntity = usuarioSerializer(many=True, read_only=True)
+    entidad_usuario = usuarioSerializer(read_only=True, many=False)
+   # print(AMBU_Solicitud_Baja.sbja_usuario)
+    #entidad_usuario = serializers.HyperlinkedRelatedField(read_only=True, view_name='usuario-lc')
+    #entidad_usuarioId = serializers.PrimaryKeyRelatedField(write_only=True, queryset=AMBU_Usuario.objects.all(), source='sbja_usuario')
     class Meta:
         model = AMBU_Solicitud_Baja
-        fields = ('id', 'sbja_fecha_solicitud', 'sbja_estado_solicitud', 'sbja_usuario', 'sbja_usuarioEntity')
+        fields = ('id', 'sbja_fecha_solicitud', 'sbja_estado_solicitud', 'sbja_usuario', 'entidad_usuario')
+        depth = 1

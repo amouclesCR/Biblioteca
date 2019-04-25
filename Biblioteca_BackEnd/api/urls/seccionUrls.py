@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from Biblioteca_BackEnd.api.viewsFolder.view import SeccionLCView, SeccionRUView
+from Biblioteca_BackEnd.api.viewsFolder.seccionView import SeccionLCView, SeccionRUView
 app_name = "api"
 SECCION = 'seccion/'
 urlpatterns = [
