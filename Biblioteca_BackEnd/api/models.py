@@ -30,7 +30,7 @@ class AMBU_Activo (models.Model):
     act_costo = models.FloatField()
     act_organizacion = models.CharField(max_length=50)
     act_subestatus = models.CharField(max_length=50, null=True)
-    act_usuario_responsabe = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE)
+    act_usuario_responsabe = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE, db_column='act_usuario_responsabe')
     act_seccion = models.ForeignKey(AMBU_Seccion, on_delete=models.CASCADE)
 
 class AMBU_Baja (models.Model):
