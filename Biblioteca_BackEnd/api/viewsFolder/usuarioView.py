@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from rest_framework import generics, mixins
-from Biblioteca_BackEnd.api.serializers.usuarioSerializer import usuarioSerializer
+from Biblioteca_BackEnd.api.serializers.usuarioSerializer import usuarioListSerializer, usuarioUpdateSerializer
 from Biblioteca_BackEnd.api.models import AMBU_Usuario
 
 class usuarioLCView (generics.ListCreateAPIView):
     queryset = AMBU_Usuario.objects.all()
     
-    serializer_class = usuarioSerializer
+    serializer_class = usuarioListSerializer
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -19,7 +19,7 @@ class usuarioRUView (generics.RetrieveUpdateAPIView):
 
     queryset = AMBU_Usuario.objects.all()
     
-    serializer_class = usuarioSerializer
+    serializer_class = usuarioListSerializer
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

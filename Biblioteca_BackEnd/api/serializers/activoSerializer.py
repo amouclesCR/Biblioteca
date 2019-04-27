@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from Biblioteca_BackEnd.api.models import AMBU_Activo
-from Biblioteca_BackEnd.api.serializers.usuarioSerializer import usuarioSerializer
 
 class activoSerializer(serializers.ModelSerializer):
     #act_usuario_responsabe = usuarioSerializer(read_only=True, many=False)
