@@ -21,7 +21,7 @@ class activoSerializer(serializers.ModelSerializer):
         'act_usuario_responsabe',
         'act_seccion'
         )
-        depth = 1,
+        depth = 1
 class activoPUSerializer(serializers.ModelSerializer):
     #act_usuario_responsabe = usuarioSerializer(read_only=True, many=False)
     class Meta:
