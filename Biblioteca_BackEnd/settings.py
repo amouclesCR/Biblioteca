@@ -127,3 +127,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Cors Origins
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:4200',
+    'localhost:8000',
+    '127.0.0.1:9000'
+)
