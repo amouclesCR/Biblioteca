@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Biblioteca_BackEnd.api.models import AMBU_Activo
+from Biblioteca_BackEnd.api.models import AMBU_Activo, AMBU_Usuario
 from .usuarioSerializer import usuarioBySeccioSerializer
 class activoSerializer(serializers.ModelSerializer):
     #act_usuario_responsabe = usuarioSerializer(read_only=True, many=False)
@@ -42,7 +42,10 @@ class activoPUSerializer(serializers.ModelSerializer):
         )
 
 class activoBySeccionSerializer(serializers.ModelSerializer):
-    act_usuario_responsabe = usuarioBySeccioSerializer(read_only=True, many=False)
+    act_usuario = serializers.SerializerMethodField('get_usuario_responsable')
+
+    def get_usuario_responsable(self, obj):
+        return usuarioBySeccioSerializer(obj.act_usuario_responsabe).data
     class Meta:
         model = AMBU_Activo
         fields = ('id', 
@@ -58,5 +61,6 @@ class activoBySeccionSerializer(serializers.ModelSerializer):
         'act_organizacion',
         'act_subestatus',
         'act_usuario_responsabe',
+        'act_usuario'
         )
      #   depth = 1
