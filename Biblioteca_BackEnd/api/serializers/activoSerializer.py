@@ -57,6 +57,6 @@ class activoBySeccionSerializer(serializers.ModelSerializer):
         'act_costo',
         'act_organizacion',
         'act_subestatus',
-        'act_usuario_responsabe'
+        'act_usuario_responsabe',
         )
      #   depth = 1
