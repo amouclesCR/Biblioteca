@@ -22,7 +22,7 @@ class AMBU_Activo (models.Model):
     act_descripcion = models.CharField(max_length=500)
     act_observacion = models.CharField(max_length=500)
     act_numero_activo = models.CharField(max_length=50)
-    act_calor = models.CharField(max_length=50)
+    act_color = models.CharField(max_length=50)
     act_serie = models.CharField(max_length=50)
     act_modelo = models.CharField(max_length=50)
     act_marca = models.CharField(max_length=50)
