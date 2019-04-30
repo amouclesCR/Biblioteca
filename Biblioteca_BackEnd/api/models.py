@@ -7,10 +7,7 @@ class AMBU_Seccion (models.Model):
     sec_ubicacion = models.CharField(max_length=250, null=True)
 
 class AMBU_Usuario (models.Model):
-    usu_nombre_usuario = models.CharField(max_length=50)
     usu_clave = models.CharField(max_length=50)
-    usu_nombre = models.CharField(max_length=50)
-    usu_apellidos = models.CharField(max_length=50)
     usu_identificacion = models.CharField(max_length=50)
 
 class AMBU_Solicitud_Baja (models.Model):

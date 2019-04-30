@@ -16,6 +16,6 @@ class loginCView (generics.CreateAPIView):
         body_unicode = request.body.decode('utf-8')
         body_data = json.loads(body_unicode)
         query = AMBU_Usuario.objects.filter(Q(usu_clave=body_data['usu_clave']) & Q(
-            usu_nombre_usuario=body_data['usu_nombre_usuario']))
+            usu_identificacion=body_data['usu_identificacion']))
         ser = loginSerializer(query, many=True)
         return Response(ser.data)
