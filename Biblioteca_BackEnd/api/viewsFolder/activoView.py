@@ -24,10 +24,14 @@ class ActivoRUView(generics.RetrieveUpdateAPIView):
     
     queryset = AMBU_Activo.objects.all()
 
-    serializer_class = activoSerializer
+    #serializer_class = activoSerializer
 
-    def get_queryset(self):
-        return AMBU_Activo.objects.all()
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT':
+            return activoPUSerializer
+        else:
+            return activoSerializer
 
 class ActivoBySeccionLView(generics.ListAPIView):
    

@@ -28,8 +28,6 @@ class AMBU_Activo (models.Model):
     act_marca = models.CharField(max_length=50)
     act_estatus = models.BooleanField(default=False)
     act_costo = models.FloatField()
-    act_organizacion = models.CharField(max_length=50)
-    act_subestatus = models.CharField(max_length=50, null=True)
     act_Fecha_Actualizado = models.DateField(default=date.today)
     act_Fecha_Creacion = models.DateField(default=date.today)
     act_usuario_responsabe = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE)
