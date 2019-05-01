@@ -2,9 +2,12 @@ from django.db import models
 from datetime import date
 # Create your models here.
 
+class AMBU_Departamento (models.Model):
+    dep_nombre = models.CharField(max_length=50)
+
 class AMBU_Seccion (models.Model):
     sec_nombre = models.CharField(max_length=50)
-    sec_ubicacion = models.CharField(max_length=250, null=True)
+    sec_departamento = models.ForeignKey(AMBU_Departamento, on_delete=models.CASCADE)
 
 class AMBU_Usuario (models.Model):
     usu_clave = models.CharField(max_length=50)
@@ -29,6 +32,7 @@ class AMBU_Activo (models.Model):
     act_Fecha_Creacion = models.DateField(default=date.today)
     act_usuario_responsabe = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE)
     act_seccion = models.ForeignKey(AMBU_Seccion, on_delete=models.CASCADE)
+    #act_seccione = models.ForeignKey(AMBU_Ubicacion, on_delete=models.CASCADE)
 
 class AMBU_Baja (models.Model):
     bja_motivos_solicitud = models.CharField(max_length=250)

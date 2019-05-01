@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/', include('Biblioteca_BackEnd.api.urls.solicitudBajaUrls', namespace='api-solicitud')),
     path('api/', include('Biblioteca_BackEnd.api.urls.activoUrls', namespace='api-activo')),
     path('api/', include('Biblioteca_BackEnd.api.urls.bajaUrls', namespace='api-baja')),
-    path('api/', include('Biblioteca_BackEnd.api.urls.loginUrls', namespace='api-login'))
+    path('api/', include('Biblioteca_BackEnd.api.urls.loginUrls', namespace='api-login')),
+     path('api/', include('Biblioteca_BackEnd.api.urls.departamentoUrls', namespace='api-departamento'))
 ]
