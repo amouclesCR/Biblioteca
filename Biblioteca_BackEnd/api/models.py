@@ -12,6 +12,7 @@ class AMBU_Seccion (models.Model):
 class AMBU_Usuario (models.Model):
     usu_clave = models.CharField(max_length=50)
     usu_identificacion = models.CharField(max_length=50)
+    usu_correo = models.CharField(max_length=50)
 
 class AMBU_Solicitud_Baja (models.Model):
     sbja_fecha_solicitud = models.DateField(auto_now=False)
