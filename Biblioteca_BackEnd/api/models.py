@@ -13,11 +13,7 @@ class AMBU_Usuario (models.Model):
     usu_clave = models.CharField(max_length=50)
     usu_identificacion = models.CharField(max_length=50)
     usu_correo = models.CharField(max_length=50)
-
-class AMBU_Solicitud_Baja (models.Model):
-    sbja_fecha_solicitud = models.DateField(auto_now=False)
-    sbja_estado_solicitud = models.BooleanField(default=False)
-    sbja_usuario = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE, null=False, related_name='entidad_usuario')
+    usu_nombre = models.CharField(max_length=50)
 
 class AMBU_Activo (models.Model):
     act_descripcion = models.CharField(max_length=500)
@@ -34,6 +30,12 @@ class AMBU_Activo (models.Model):
     act_usuario_responsabe = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE)
     act_seccion = models.ForeignKey(AMBU_Seccion, on_delete=models.CASCADE)
     #act_seccione = models.ForeignKey(AMBU_Ubicacion, on_delete=models.CASCADE)
+
+class AMBU_Solicitud_Baja (models.Model):
+    sbja_fecha_solicitud = models.DateField(auto_now=False)
+    sbja_estado_solicitud = models.BooleanField(default=False)
+    sbja_usuario = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE, null=False, related_name='entidad_usuario')
+    sbja_activos = models.ManyToManyField(AMBU_Activo, null=False)
 
 class AMBU_Baja (models.Model):
     bja_motivos_solicitud = models.CharField(max_length=250)
