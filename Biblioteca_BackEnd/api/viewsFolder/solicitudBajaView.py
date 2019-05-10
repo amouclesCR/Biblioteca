@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.response import Response
 from rest_framework import generics, mixins
 from Biblioteca_BackEnd.api.serializers.solicitudBajaSerializer import solicitudBajaSerializer
 from Biblioteca_BackEnd.api.models import AMBU_Solicitud_Baja
@@ -26,3 +27,14 @@ class solicitudBajaRUView (generics.RetrieveUpdateAPIView):
     
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+        
+class solicitudByUsuarioL(generics.ListAPIView):
+   
+    def get(self, request, *args, **kwargs):
+        fk = kwargs.get('pk') 
+
+        query = AMBU_Solicitud_Baja.objects.filter(sbja_usuario=fk)
+
+        serializer = solicitudBajaSerializer(query, many=True)
+
+        return Response(serializer.data)
