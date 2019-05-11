@@ -1,12 +1,25 @@
 from rest_framework import serializers
 from Biblioteca_BackEnd.api.models import AMBU_Solicitud_Baja, AMBU_Usuario
-from .usuarioSerializer import usuarioListSerializer
+from .activoSerializer import activoSerializer
+from .usuarioSerializer  import usuarioListSerializer
+
 
 class solicitudBajaSerializer(serializers.ModelSerializer):
-    #entidad_usuario = usuarioListSerializer(read_only=True, many=False)
-   # print(AMBU_Solicitud_Baja.sbja_usuario)
-    #entidad_usuario = serializers.HyperlinkedRelatedField(read_only=True, view_name='usuario-lc')
-    #entidad_usuarioId = serializers.PrimaryKeyRelatedField(write_only=True, queryset=AMBU_Usuario.objects.all(), source='sbja_usuario')
+    sbja_activos_modelos = serializers.SerializerMethodField('get_activos')
+    sbja_usuario_modelo = serializers.SerializerMethodField('get_usuario')
+    sbja_nuevoUsuario_modelo = serializers.SerializerMethodField('get_usuario_nuevo')
+
+    def get_activos(self, obj):
+        return activoSerializer(obj.sbja_activos, many=True, read_only=True).data
+
+    def get_usuario(self, obj):
+        return usuarioListSerializer(obj.sbja_usuario).data
+    
+    def get_usuario_nuevo(self, obj):
+        return usuarioListSerializer(obj.sbja_usuario_nuevo).data
+
     class Meta:
         model = AMBU_Solicitud_Baja
-        fields = ('id', 'sbja_fecha_solicitud', 'sbja_estado_solicitud', 'sbja_usuario', 'sbja_usuario_nuevo', 'sbja_activos', 'sbja_solicitud_traspaso', 'sbja_numero_formulario')
+        fields = ('id', 'sbja_fecha_solicitud', 'sbja_estado_solicitud', 'sbja_usuario', 'sbja_usuario_nuevo',
+                  'sbja_activos', 'sbja_solicitud_traspaso', 'sbja_numero_formulario', 'sbja_activos_modelos',
+                  'sbja_usuario_modelo', 'sbja_nuevoUsuario_modelo')
