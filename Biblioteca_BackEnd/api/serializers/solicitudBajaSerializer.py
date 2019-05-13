@@ -23,3 +23,10 @@ class solicitudBajaSerializer(serializers.ModelSerializer):
         fields = ('id', 'sbja_fecha_solicitud', 'sbja_estado_solicitud', 'sbja_usuario', 'sbja_usuario_nuevo',
                   'sbja_activos', 'sbja_solicitud_traspaso', 'sbja_numero_formulario', 'sbja_activos_modelos',
                   'sbja_usuario_modelo', 'sbja_nuevoUsuario_modelo')
+
+class solicitudBajaAprobar(serializers.ModelSerializer):
+
+    class Meta:
+        model = AMBU_Solicitud_Baja
+        fields = ('id', 'sbja_fecha_solicitud', 'sbja_estado_solicitud',
+                  'sbja_activos', 'sbja_solicitud_traspaso', 'sbja_numero_formulario')

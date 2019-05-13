@@ -9,11 +9,15 @@ class AMBU_Seccion (models.Model):
     sec_nombre = models.CharField(max_length=50)
     sec_departamento = models.ForeignKey(AMBU_Departamento, on_delete=models.CASCADE)
 
+class AMBU_Rol (models.Model):
+        rol_rol = models.CharField(max_length=50)
+
 class AMBU_Usuario (models.Model):
     usu_clave = models.CharField(max_length=50)
     usu_identificacion = models.CharField(max_length=50, unique=True)
     usu_correo = models.CharField(max_length=50)
     usu_nombre = models.CharField(max_length=50)
+    usu_rol = models.ForeignKey(AMBU_Rol, on_delete=models.CASCADE)
 
 class AMBU_Activo (models.Model):
     act_descripcion = models.CharField(max_length=500)
