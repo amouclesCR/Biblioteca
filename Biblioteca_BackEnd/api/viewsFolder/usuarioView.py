@@ -1,12 +1,24 @@
 from django.shortcuts import render
 from rest_framework import generics, mixins
-from Biblioteca_BackEnd.api.serializers.usuarioSerializer import usuarioListSerializer, usuarioUpdateSerializer
+from rest_framework.response import Response
+from Biblioteca_BackEnd.api.serializers.usuarioSerializer import usuarioListSerializer, usuarioUpdateSerializer, usuarioCreateSerializer, recoverySerializer
 from Biblioteca_BackEnd.api.models import AMBU_Usuario
+from django.db.models import Q
+import json
+from rest_framework import status
 
 class usuarioLCView (generics.ListCreateAPIView):
     queryset = AMBU_Usuario.objects.all()
-    
+
     serializer_class = usuarioListSerializer
+
+
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'POST':
+            return usuarioCreateSerializer
+        else:
+            return usuarioListSerializer
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -26,3 +38,22 @@ class usuarioRUView (generics.RetrieveUpdateAPIView):
     
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+
+class recoveryCView (generics.CreateAPIView):
+
+    def post(self, request, *args, **kwargs):
+        pk = kwargs.get('pk') 
+
+        body_unicode = request.body.decode('utf-8')
+        body_data = json.loads(body_unicode)
+
+        query = AMBU_Usuario.objects.filter(Q(id=pk) & Q(usu_correo=body_data['usu_correo']) & Q(
+            usu_identificacion=body_data['usu_identificacion']))
+        print(query)
+        if (len(query) > 0):
+            query[0].usu_clave = body_data['usu_clave']
+            query[0].save()
+            serializer = recoverySerializer(query[0])
+            return Response(status=status.HTTP_200_OK)
+        else: 
+            return Response(status=status.HTTP_400_BAD_REQUEST)   

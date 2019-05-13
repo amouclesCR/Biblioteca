@@ -17,7 +17,17 @@ class usuarioUpdateSerializer(serializers.ModelSerializer):
         model = AMBU_Usuario
         fields = ('id', 'usu_identificacion', "usu_nombre", "usu_correo", "usu_rol", "usu_rol_modelo")
 
+class usuarioCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AMBU_Usuario
+        fields = ('usu_identificacion', "usu_nombre", "usu_correo", "usu_clave")
+
 class usuarioBySeccioSerializer(serializers.ModelSerializer):
     class Meta:
         model = AMBU_Usuario
         fields = ('id', 'usu_identificacion')
+
+class recoverySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AMBU_Usuario
+        fields = ('id','usu_identificacion', "usu_correo", "usu_clave")

@@ -17,7 +17,7 @@ class AMBU_Usuario (models.Model):
     usu_identificacion = models.CharField(max_length=50, unique=True)
     usu_correo = models.CharField(max_length=50)
     usu_nombre = models.CharField(max_length=50)
-    usu_rol = models.ForeignKey(AMBU_Rol, on_delete=models.CASCADE)
+    usu_rol = models.ForeignKey(AMBU_Rol, on_delete=models.CASCADE, default=2)
 
 class AMBU_Activo (models.Model):
     act_descripcion = models.CharField(max_length=500)
