@@ -18,6 +18,7 @@ class AMBU_Usuario (models.Model):
     usu_correo = models.CharField(max_length=50)
     usu_nombre = models.CharField(max_length=50)
     usu_rol = models.ForeignKey(AMBU_Rol, on_delete=models.CASCADE, default=2)
+    usu_fecha = models.DateTimeField(default=date.today)
 
 class AMBU_Activo (models.Model):
     act_descripcion = models.CharField(max_length=500)
@@ -29,14 +30,14 @@ class AMBU_Activo (models.Model):
     act_marca = models.CharField(max_length=50)
     act_estatus = models.BooleanField(default=False)
     act_costo = models.FloatField()
-    act_Fecha_Actualizado = models.DateField(default=date.today)
-    act_Fecha_Creacion = models.DateField(default=date.today)
+    act_Fecha_Actualizado = models.DateTimeField(default=date.today)
+    act_Fecha_Creacion = models.DateTimeField(default=date.today)
     act_usuario_responsabe = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE)
     act_seccion = models.ForeignKey(AMBU_Seccion, on_delete=models.CASCADE)
     #act_seccione = models.ForeignKey(AMBU_Ubicacion, on_delete=models.CASCADE)
 
 class AMBU_Solicitud_Baja (models.Model):
-    sbja_fecha_solicitud = models.DateField(auto_now=True)
+    sbja_fecha_solicitud = models.DateTimeField(auto_now=True)
     sbja_numero_formulario = models.CharField(max_length=50)
     sbja_estado_solicitud = models.BooleanField(default=False)
     sbja_usuario = models.ForeignKey(AMBU_Usuario, on_delete=models.CASCADE, null=False, related_name='entidad_usuario')
