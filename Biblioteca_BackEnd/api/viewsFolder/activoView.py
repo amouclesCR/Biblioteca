@@ -54,3 +54,14 @@ class ActivoByUsuarioLView(generics.ListAPIView):
         serializer = activoSerializer(query, many=True)
 
         return Response(serializer.data)
+
+class ActivoByNumeroActivoLView(generics.ListAPIView):
+   
+    def get(self, request, *args, **kwargs):
+        numeroActivo = kwargs.get('numeroactivo') 
+        print("tas")
+        query = AMBU_Activo.objects.filter(act_numero_activo=numeroActivo)
+
+        serializer = activoSerializer(query, many=True)
+
+        return Response(serializer.data)
