@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Biblioteca_BackEnd.api',
     'corsheaders',
 ]
+AUTH_USER_MODEL = 'api.customeUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

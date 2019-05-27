@@ -1,5 +1,8 @@
 from django.db import models
 from datetime import date
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from django.db import models
 # Create your models here.
 
 class AMBU_Departamento (models.Model):
@@ -49,3 +52,8 @@ class AMBU_Baja (models.Model):
     bja_motivos_solicitud = models.CharField(max_length=250)
     bja_activo = models.ForeignKey(AMBU_Activo, on_delete=models.CASCADE)
     bja_baja = models.ForeignKey(AMBU_Solicitud_Baja, on_delete=models.CASCADE)
+
+class customeUser (AbstractUser):
+    pass
+    name = models.CharField(max_length=50)
+    permiso = models.CharField(max_length=50, default="")

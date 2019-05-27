@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Biblioteca_BackEnd.api.models import AMBU_Usuario
+from Biblioteca_BackEnd.api.models import AMBU_Usuario, customeUser
 from .rolSerializar import rolSerializer
 
 class usuarioListSerializer(serializers.ModelSerializer):
@@ -31,3 +31,15 @@ class recoverySerializer(serializers.ModelSerializer):
     class Meta:
         model = AMBU_Usuario
         fields = ('id','usu_identificacion', "usu_correo", "usu_clave")
+
+class customSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = customeUser
+        fields = ('username', 'first_name', 'email', 'password')
+
+    def create(self, validated_data):
+        user = customeUser(email=validated_data['email'], username=validated_data['username'])
+        
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
