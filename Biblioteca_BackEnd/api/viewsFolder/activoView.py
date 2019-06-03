@@ -3,10 +3,11 @@ from rest_framework import generics, viewsets
 from rest_framework.response import Response
 from Biblioteca_BackEnd.api.serializers.activoSerializer import activoSerializer, activoPUSerializer, activoBySeccionSerializer
 from Biblioteca_BackEnd.api.models import AMBU_Activo
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 class ActivoLCView(generics.ListCreateAPIView):
-    
+    permission_classes = (IsAuthenticated,)
     queryset = AMBU_Activo.objects.all()
     
     #serializer_class = activoSerializer

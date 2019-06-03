@@ -53,7 +53,7 @@ class AMBU_Baja (models.Model):
     bja_activo = models.ForeignKey(AMBU_Activo, on_delete=models.CASCADE)
     bja_baja = models.ForeignKey(AMBU_Solicitud_Baja, on_delete=models.CASCADE)
 
-class customeUser (AbstractUser):
+class AMBU_CustomeUsuario (AbstractUser):
     pass
     name = models.CharField(max_length=50)
-    permiso = models.CharField(max_length=50, default="")
+    rol = models.CharField(max_length=50, default="")

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, mixins
 from rest_framework.response import Response
 from Biblioteca_BackEnd.api.serializers.usuarioSerializer import usuarioListSerializer, usuarioUpdateSerializer, usuarioCreateSerializer, recoverySerializer, customSerializer
-from Biblioteca_BackEnd.api.models import AMBU_Usuario, customeUser
+from Biblioteca_BackEnd.api.models import AMBU_Usuario, AMBU_CustomeUsuario
 from django.db.models import Q
 import json
 
@@ -58,6 +58,6 @@ class recoveryCView (generics.CreateAPIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)   
 
 class customeLCView (generics.ListCreateAPIView):
-    queryset = customeUser.objects.all()
+    queryset = AMBU_CustomeUsuario.objects.all()
 
     serializer_class = customSerializer

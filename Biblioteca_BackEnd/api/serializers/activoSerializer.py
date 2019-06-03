@@ -28,7 +28,8 @@ class activoSerializer(serializers.ModelSerializer):
         'act_usuario_responsabe',
         'act_usuario',
         'act_seccion',
-        'act_seccion_modelo'
+        'act_seccion_modelo',
+        'act_Fecha_Creacion'
         )
 class activoPUSerializer(serializers.ModelSerializer):
     #act_usuario_responsabe = usuarioSerializer(read_only=True, many=False)
@@ -66,6 +67,7 @@ class activoBySeccionSerializer(serializers.ModelSerializer):
         'act_estatus',
         'act_costo',
         'act_usuario_responsabe',
-        'act_usuario'
+        'act_usuario',
+        'act_Fecha_Creacion'
         )
      #   depth = 1

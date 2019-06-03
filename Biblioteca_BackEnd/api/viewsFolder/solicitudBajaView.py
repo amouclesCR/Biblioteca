@@ -67,6 +67,6 @@ class solicitudAprobar(generics.UpdateAPIView):
                     activo.act_estatus = False
                 activo.save()
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)   
+            return Response("No se han encontrado activos en la solicitud", status=status.HTTP_400_BAD_REQUEST)   
         query.save()
         return Response(status=status.HTTP_200_OK)

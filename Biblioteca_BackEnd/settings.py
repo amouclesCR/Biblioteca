@@ -40,8 +40,18 @@ INSTALLED_APPS = [
     'rest_framework',
     'Biblioteca_BackEnd.api',
     'corsheaders',
+    'rest_framework.authtoken'
 ]
-AUTH_USER_MODEL = 'api.customeUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+AUTH_USER_MODEL = 'api.AMBU_CustomeUsuario'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
