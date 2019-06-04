@@ -35,7 +35,7 @@ class recoverySerializer(serializers.ModelSerializer):
 class customSerializer(serializers.ModelSerializer):
     class Meta:
         model = AMBU_CustomeUsuario
-        fields = ('username', 'first_name', 'email')
+        fields = ('username', 'first_name', 'email', "cus_rol")
 
     def create(self, validated_data):
         user = AMBU_CustomeUsuario(email=validated_data['email'], username=validated_data['username'])
