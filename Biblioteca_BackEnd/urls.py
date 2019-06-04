@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
+from django.urls import path
+from rest_framework_simplejwt import views as jwt_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('Biblioteca_BackEnd.api.urls.seccionUrls', namespace='api-seccion')),
@@ -24,5 +28,8 @@ urlpatterns = [
     path('api/', include('Biblioteca_BackEnd.api.urls.bajaUrls', namespace='api-baja')),
     path('api/', include('Biblioteca_BackEnd.api.urls.loginUrls', namespace='api-login')),
     path('api/', include('Biblioteca_BackEnd.api.urls.departamentoUrls', namespace='api-departamento')),
-    path('api/', include('Biblioteca_BackEnd.api.urls.rolUrls', namespace='api-rol'))
+    path('api/', include('Biblioteca_BackEnd.api.urls.rolUrls', namespace='api-rol')),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
 ]

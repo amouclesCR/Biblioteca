@@ -3,9 +3,10 @@ from rest_framework import generics, viewsets
 from rest_framework.response import Response
 from Biblioteca_BackEnd.api.serializers.seccionSerializer import  seccionSerializer, seccionUCSerializer
 from Biblioteca_BackEnd.api.models import AMBU_Seccion
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 class SeccionLCView(generics.ListCreateAPIView):
-    
+    #permission_classes = (IsAuthenticated,)
     queryset = AMBU_Seccion.objects.all()
     
     serializer_class = seccionSerializer
