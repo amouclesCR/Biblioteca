@@ -1,16 +1,16 @@
 from django.shortcuts import render
 from rest_framework import generics, mixins
 from rest_framework.response import Response
-from Biblioteca_BackEnd.api.serializers.usuarioSerializer import usuarioListSerializer, usuarioUpdateSerializer, usuarioCreateSerializer, recoverySerializer, customSerializer
+from Biblioteca_BackEnd.api.serializers.usuarioSerializer import usuarioListSerializer, usuarioUpdateSerializer, usuarioCreateSerializer, recoverySerializer, customSerializer, customUserRegisterSerializer
 from Biblioteca_BackEnd.api.models import AMBU_Usuario, AMBU_CustomeUsuario
 from django.db.models import Q
 import json
 
+
 class usuarioLCView (generics.ListCreateAPIView):
-    queryset = AMBU_Usuario.objects.all()
+    queryset = AMBU_CustomeUsuario.objects.all()
 
     serializer_class = usuarioListSerializer
-
 
     def get_serializer_class(self):
         method = self.request.method
@@ -21,27 +21,29 @@ class usuarioLCView (generics.ListCreateAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-    
+
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
 
 class usuarioRUView (generics.RetrieveUpdateAPIView):
     lookup_field = 'pk'
 
-    queryset = AMBU_Usuario.objects.all()
-    
+    queryset = AMBU_CustomeUsuario.objects.all()
+
     serializer_class = usuarioListSerializer
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
-    
+
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+
 
 class recoveryCView (generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
-        pk = kwargs.get('pk') 
+        pk = kwargs.get('pk')
 
         body_unicode = request.body.decode('utf-8')
         body_data = json.loads(body_unicode)
@@ -54,10 +56,11 @@ class recoveryCView (generics.CreateAPIView):
             query[0].save()
             serializer = recoverySerializer(query[0])
             return Response(status=status.HTTP_200_OK)
-        else: 
-            return Response(status=status.HTTP_400_BAD_REQUEST)   
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-class customeLCView (generics.ListCreateAPIView):
+
+class customeCView (generics.CreateAPIView):
     queryset = AMBU_CustomeUsuario.objects.all()
 
-    serializer_class = customSerializer
+    serializer_class = customUserRegisterSerializer

@@ -26,8 +26,8 @@ class AMBU_Usuario (models.Model):
 class AMBU_CustomeUsuario (AbstractUser):
     pass
     name = models.CharField(max_length=50)
-    cus_rol = models.CharField(max_length=50, default="")
-    cus_identificacion = models.CharField(max_length=50, default="")
+    cus_rol = models.ForeignKey(AMBU_Rol, on_delete=models.CASCADE, default=2)
+    cus_identificacion = models.CharField(max_length=50, unique=True)
 
 class AMBU_Activo (models.Model):
     act_descripcion = models.CharField(max_length=500)
