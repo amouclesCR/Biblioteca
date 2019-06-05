@@ -10,7 +10,7 @@ class AMBU_Departamento (models.Model):
 
 class AMBU_Seccion (models.Model):
     sec_nombre = models.CharField(max_length=50)
-    sec_departamento = models.ForeignKey(AMBU_Departamento, on_delete=models.CASCADE)
+    # sec_departamento = models.ForeignKey(AMBU_Departamento, on_delete=models.CASCADE)
 
 class AMBU_Rol (models.Model):
         rol_rol = models.CharField(max_length=50)
@@ -31,7 +31,7 @@ class AMBU_CustomeUsuario (AbstractUser):
 
 class AMBU_Activo (models.Model):
     act_descripcion = models.CharField(max_length=500)
-    act_observacion = models.CharField(max_length=500)
+    act_observacion = models.CharField(max_length=500, blank=True)
     act_numero_activo = models.CharField(max_length=50)
     act_color = models.CharField(max_length=50)
     act_serie = models.CharField(max_length=50)

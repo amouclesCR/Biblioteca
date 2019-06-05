@@ -7,14 +7,10 @@ class seccionUCSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AMBU_Seccion
-        fields = ('id', 'sec_nombre', 'sec_departamento')
+        fields = ('id', 'sec_nombre')
 
 class seccionSerializer(serializers.ModelSerializer):
-    sec_departamento_modelo = serializers.SerializerMethodField('get_departamento')
     
-    def get_departamento(self, obj):
-        return departamentoSerializer(obj.sec_departamento).data
-
     class Meta:
         model = AMBU_Seccion
-        fields = ('id', 'sec_nombre', 'sec_departamento', 'sec_departamento_modelo')
+        fields = ('id', 'sec_nombre')
