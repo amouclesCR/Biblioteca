@@ -7,7 +7,6 @@ from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 class ActivoLCView(generics.ListCreateAPIView):
-    print("hola")
     #permission_classes = (IsAuthenticated,)
     queryset = AMBU_Activo.objects.all()
     

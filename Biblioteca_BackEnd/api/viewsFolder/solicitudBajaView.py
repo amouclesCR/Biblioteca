@@ -19,7 +19,7 @@ class solicitudBajaLCView (generics.ListCreateAPIView):
         return self.create(request, *args, **kwargs)
 
 class solicitudBajaLView (generics.ListAPIView):
-    queryset = AMBU_Solicitud_Baja.objects.filter(sbja_estado_solicitud=False)
+    queryset = AMBU_Solicitud_Baja.objects.filter(sbja_estado_solicitud="E")
     
     serializer_class = solicitudBajaSerializer
 
@@ -55,7 +55,7 @@ class solicitudAprobar(generics.UpdateAPIView):
     def put(self, request, *args, **kwargs):
         pk = kwargs.get('pk') 
         query = AMBU_Solicitud_Baja.objects.get(id=pk)
-        query.sbja_estado_solicitud = True
+        query.sbja_estado_solicitud = "A"
         activos = AMBU_Solicitud_Baja.objects.filter(id=pk).values_list('sbja_activos')
         
         if (activos[0][0] != None and len(activos[0]) > 0):
@@ -68,5 +68,18 @@ class solicitudAprobar(generics.UpdateAPIView):
                 activo.save()
         else:
             return Response("No se han encontrado activos en la solicitud", status=status.HTTP_400_BAD_REQUEST)   
+        query.save()
+        return Response(status=status.HTTP_200_OK)
+
+class solicitudRechazar(generics.UpdateAPIView):
+    
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get('pk') 
+        query = AMBU_Solicitud_Baja.objects.get(id=pk)
+
+        if query is None:
+            return Response("No se ha encontrado la solicitud", status=status.HTTP_400_BAD_REQUEST)   
+
+        query.sbja_estado_solicitud = "R"
         query.save()
         return Response(status=status.HTTP_200_OK)
