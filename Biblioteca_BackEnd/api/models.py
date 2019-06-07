@@ -32,7 +32,7 @@ class AMBU_CustomeUsuario (AbstractUser):
 class AMBU_Activo (models.Model):
     act_descripcion = models.CharField(max_length=500)
     act_observacion = models.CharField(max_length=500, blank=True)
-    act_numero_activo = models.CharField(max_length=50)
+    act_numero_activo = models.CharField(max_length=50, unique=True)
     act_color = models.CharField(max_length=50)
     act_serie = models.CharField(max_length=50)
     act_modelo = models.CharField(max_length=50)
@@ -47,7 +47,7 @@ class AMBU_Activo (models.Model):
 
 class AMBU_Solicitud_Baja (models.Model):
     sbja_fecha_solicitud = models.DateTimeField(auto_now=True)
-    sbja_numero_formulario = models.CharField(max_length=50)
+    sbja_numero_formulario = models.CharField(max_length=50, unique=True)
     sbja_estado_solicitud = models.CharField(max_length=1, default="E")
     sbja_usuario = models.ForeignKey(AMBU_CustomeUsuario, on_delete=models.CASCADE, null=False, related_name='entidad_usuario')
     sbja_usuario_nuevo = models.ForeignKey(AMBU_CustomeUsuario, on_delete=models.CASCADE, null=True)

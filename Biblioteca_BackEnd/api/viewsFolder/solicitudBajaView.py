@@ -4,19 +4,18 @@ from rest_framework import generics, mixins
 from rest_framework import status
 from django.db.models import Q
 import json
-from Biblioteca_BackEnd.api.serializers.solicitudBajaSerializer import solicitudBajaSerializer, solicitudBajaAprobar
+from Biblioteca_BackEnd.api.serializers.solicitudBajaSerializer import solicitudBajaSerializer, solicitudBajaAprobar, solicitudBajaCUSerializer
 from Biblioteca_BackEnd.api.models import AMBU_Solicitud_Baja, AMBU_Activo
 
 class solicitudBajaLCView (generics.ListCreateAPIView):
     queryset = AMBU_Solicitud_Baja.objects.all()
     
-    serializer_class = solicitudBajaSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-    
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'POST':
+            return solicitudBajaCUSerializer
+        else:
+            return solicitudBajaSerializer
 
 class solicitudBajaLView (generics.ListAPIView):
     queryset = AMBU_Solicitud_Baja.objects.filter(sbja_estado_solicitud="E")
@@ -30,14 +29,13 @@ class solicitudBajaRUView (generics.RetrieveUpdateAPIView):
     lookup_field = 'pk'
 
     queryset = AMBU_Solicitud_Baja.objects.all()
-    
-    serializer_class = solicitudBajaSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-    
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+    def get_serializer_class(self):
+        method = self.request.method
+        if method == 'PUT':
+            return solicitudBajaCUSerializer
+        else:
+            return solicitudBajaSerializer
         
 class solicitudByUsuarioL(generics.ListAPIView):
    
