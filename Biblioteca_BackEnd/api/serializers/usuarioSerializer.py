@@ -53,33 +53,25 @@ class customSerializer(serializers.ModelSerializer):
 
 
 class customUserRegisterSerializer(serializers.ModelSerializer):
+
+    #   VALIDACIONES DE CAMPOS
     cus_identificacion = serializers.CharField(max_length=100, 
         validators=[UniqueValidator(queryset=AMBU_CustomeUsuario.objects.all(), 
-        message="identificacion debe ser unica")])
-    username = serializers.CharField(max_length=100, validators=[UniqueValidator(queryset=AMBU_CustomeUsuario.objects.all(), message="unico")])
+        message="Ya existe un usuario con esa identificación")])
+    username = serializers.CharField(max_length=100, 
+        validators=[UniqueValidator(queryset=AMBU_CustomeUsuario.objects.all(),
+        message="Ya existe un usuario con ese nombre de usuario")])
+    email = serializers.CharField(max_length=100, 
+        validators=[UniqueValidator(queryset=AMBU_CustomeUsuario.objects.all(),
+        message="Ya existe un usuario con ese correo")])
+    
+    #   CAMPOS A UTILIZAR EN EL JSON
     class Meta:
         model = AMBU_CustomeUsuario
         fields = ('username', 'email', 'cus_identificacion',
                   'password', 'first_name')
-        #extra_kwargs = {"username": {"validators": [validate]}}
-    # def validate_cus_identificacion(self, attrs):
-    #     """
-    #     Check that the blog post is about Django.
-    #     """
-    #     print("siiiii")
-    #     value = "dLjango"
-    #     if "django" not in value.lower():
-    #         raise serializers.ValidationError("Blog post is not about Django")
-    #     return attrs
-    # def validate_username(self, attrs):
-    #     """
-    #     Check that the blog post is about Django.
-    #     """
-    #     print("siiiii")
-    #     value = "dLjango" 
-    #     if "django" not in value.lower():
-    #         raise serializers.ValidationError("Usuario ocupado")
-    #     return attrs
+
+    #   CREA EL USUARIO Y ASIGNA LA CONTRASEÑA ENCRIPTIADA
     def create(self, validated_data):
         user = AMBU_CustomeUsuario(
             email=validated_data['email'], username=validated_data['username'], cus_identificacion=validated_data['cus_identificacion'], first_name=validated_data['first_name'])
