@@ -1,30 +1,21 @@
 from django.shortcuts import render
 from rest_framework import generics, mixins
 from rest_framework.response import Response
-from Biblioteca_BackEnd.api.serializers.usuarioSerializer import usuarioListSerializer, usuarioUpdateSerializer, usuarioCreateSerializer, recoverySerializer, customSerializer, customUserRegisterSerializer
+from Biblioteca_BackEnd.api.serializers.usuarioSerializer import (usuarioListSerializer,
+    recoverySerializer,  
+    customUserRegisterSerializer)
 from Biblioteca_BackEnd.api.models import AMBU_Usuario, AMBU_CustomeUsuario
 from django.db.models import Q
 import json
 
 
-class usuarioLCView (generics.ListCreateAPIView):
+class usuarioLView (generics.ListAPIView):
     queryset = AMBU_CustomeUsuario.objects.all()
 
     serializer_class = usuarioListSerializer
 
-    def get_serializer_class(self):
-        method = self.request.method
-        if method == 'POST':
-            return usuarioCreateSerializer
-        else:
-            return usuarioListSerializer
-
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
-
 
 class usuarioRUView (generics.RetrieveUpdateAPIView):
     lookup_field = 'pk'
@@ -60,7 +51,7 @@ class recoveryCView (generics.CreateAPIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class customeCView (generics.CreateAPIView):
+class registerCView (generics.CreateAPIView):
     queryset = AMBU_CustomeUsuario.objects.all()
 
     serializer_class = customUserRegisterSerializer

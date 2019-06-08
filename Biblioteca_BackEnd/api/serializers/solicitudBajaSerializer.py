@@ -6,7 +6,7 @@ from rest_framework.validators import UniqueValidator
 
 class solicitudBajaSerializer(serializers.ModelSerializer):
 
-    #   CAMPOS PARA ALMACENAR ENTIDAS RELACIONADAS CON LA ENTIDAD ACTIVO
+    #   CAMPOS PARA ALMACENAR ENTIDAS RELACIONADAS CON LA ENTIDAD SOLICITUD DE BAJA
     sbja_activos_modelos = serializers.SerializerMethodField('get_activos')
     sbja_usuario_modelo = serializers.SerializerMethodField('get_usuario')
     sbja_nuevoUsuario_modelo = serializers.SerializerMethodField(
@@ -34,7 +34,7 @@ class solicitudBajaSerializer(serializers.ModelSerializer):
 class solicitudBajaCUSerializer(serializers.ModelSerializer):
 
     #   VALIDACION DE CAMPOS
-    #   sbja_numero_formulario '-> REVISA QUE EL CAMPO SEA ÚNCO
+    #   sbja_numero_formulario -> REVISA QUE EL CAMPO SEA ÚNCO
     sbja_numero_formulario = serializers.CharField(max_length=100, 
         validators=[UniqueValidator(queryset=AMBU_Solicitud_Baja.objects.all(), 
         message="Ya existe una solicitud con ese número de formulario")])
