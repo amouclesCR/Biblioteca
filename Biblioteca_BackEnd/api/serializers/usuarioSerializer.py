@@ -16,7 +16,7 @@ class usuarioListSerializer(serializers.ModelSerializer):
     class Meta:
         model = AMBU_CustomeUsuario
         fields = ('id', 'cus_identificacion', "email",
-                  "cus_rol", "cus_rol_modelo", 'first_name')
+                  "cus_rol", "cus_rol_modelo", 'first_name', 'date_joined')
 
 class usuarioBySeccioSerializer(serializers.ModelSerializer):
     
