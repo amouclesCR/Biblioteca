@@ -8,20 +8,28 @@ from Biblioteca_BackEnd.api.models import AMBU_Usuario, AMBU_CustomeUsuario
 from django.db.models import Q
 import json
 
-
+#   LISTA LOS USUAIRO
 class usuarioLView (generics.ListAPIView):
+    
+    #   CONSULTA
     queryset = AMBU_CustomeUsuario.objects.all()
 
+    #   MAPEA LOS DATOS
     serializer_class = usuarioListSerializer
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+#   OBTIENE O ACTUALIZA UN USUARIO
 class usuarioRUView (generics.RetrieveUpdateAPIView):
+
+    #   OBTIENE EL USUARIO
     lookup_field = 'pk'
 
+    #   CONSULTA
     queryset = AMBU_CustomeUsuario.objects.all()
 
+    #   MAPEA LOS DATOS
     serializer_class = usuarioListSerializer
 
     def get(self, request, *args, **kwargs):
@@ -50,8 +58,11 @@ class recoveryCView (generics.CreateAPIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
+#   REGISTRA UN USUARIO
 class registerCView (generics.CreateAPIView):
+
+    #   CONSULTA
     queryset = AMBU_CustomeUsuario.objects.all()
 
+    #   MAPEA LOS DATOS
     serializer_class = customUserRegisterSerializer
