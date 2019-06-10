@@ -4,9 +4,10 @@ from rest_framework.response import Response
 from Biblioteca_BackEnd.api.serializers.usuarioSerializer import (usuarioListSerializer,
     recoverySerializer,  
     customUserRegisterSerializer)
-from Biblioteca_BackEnd.api.models import AMBU_Usuario, AMBU_CustomeUsuario
+from Biblioteca_BackEnd.api.models import AMBU_CustomeUsuario
 from django.db.models import Q
 import json
+from rest_framework import status
 
 #   LISTA LOS USUAIRO
 class usuarioLView (generics.ListAPIView):
@@ -38,24 +39,31 @@ class usuarioRUView (generics.RetrieveUpdateAPIView):
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
-
+#   SE ENCARGA DE RECUPERAR Y CAMBIAR LA CONTRASEÑA
 class recoveryCView (generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
 
+        #   OBTIENE LOS DATOS Y LOS MAPEA EN UN JSON
         body_unicode = request.body.decode('utf-8')
         body_data = json.loads(body_unicode)
 
-        query = AMBU_Usuario.objects.filter(Q(id=pk) & Q(usu_correo=body_data['usu_correo']) & Q(
-            usu_identificacion=body_data['usu_identificacion']))
-        print(query)
+        #   CONSULTA
+        query = AMBU_CustomeUsuario.objects.filter(Q(email=body_data['email']) & Q(
+            cus_identificacion=body_data['cus_identificacion']))
+        
+        #   REVISA SI ESTISTE UN USUARIO
+        #   NOTA: DEVUELVE UNA TUPLA, POR ESO SE UTILIZAN INDICES
         if (len(query) > 0):
-            query[0].usu_clave = body_data['usu_clave']
+            #   SI LA CONSULTA TIENE UN TAMAÑO MAYOR A CERO ENTONES SI ENCONTRÓ AL USUAIRO
+            #   CAMBIA LA CONTRASEÑA Y SALVA LOS DATOS
+            query[0].set_password(body_data['password'])
             query[0].save()
+            #   RETORNA QUE SE LOGRÓ CON ÉXITO
             serializer = recoverySerializer(query[0])
             return Response(status=status.HTTP_200_OK)
         else:
+            #   RETORNA UN BAD_REQUEST SI NO ENCUENTRA AL USUAIRO
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 #   REGISTRA UN USUARIO

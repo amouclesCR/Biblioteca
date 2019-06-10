@@ -12,6 +12,6 @@ urlpatterns = [
     url(r'^'+USUARIO+'$', usuarioLView.as_view(), name="usuario-lc"),
     url(r'^'+REGISTER+'$', registerCView.as_view(), name="usuario-lc"),
     url(r'^'+USUARIO+'(?P<pk>\d+)$', usuarioRUView.as_view(), name="usuario-ru"),
-    url(r'^'+RECOVERY+'(?P<pk>\d+)$', recoveryCView.as_view(), name="recovery-c"),
+    url(r'^'+RECOVERY+'$', recoveryCView.as_view(), name="recovery-c"),
    
 ]
