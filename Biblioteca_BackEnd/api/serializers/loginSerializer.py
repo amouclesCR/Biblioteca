@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from Biblioteca_BackEnd.api.models import AMBU_Usuario
 
 class loginSerializer(serializers.ModelSerializer):
 

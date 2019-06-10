@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, mixins
-from Biblioteca_BackEnd.api.serializers.loginSerializer import loginSerializer
 from Biblioteca_BackEnd.api.serializers.usuarioSerializer import customSerializer
-from Biblioteca_BackEnd.api.models import AMBU_Usuario, AMBU_CustomeUsuario
+from Biblioteca_BackEnd.api.models import AMBU_CustomeUsuario
 from rest_framework.response import Response
 from django.db.models import Q
 import json

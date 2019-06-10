@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Biblioteca_BackEnd.api.models import AMBU_Activo, AMBU_Usuario
+from Biblioteca_BackEnd.api.models import AMBU_Activo
 from .usuarioSerializer import usuarioBySeccioSerializer
 from .seccionSerializer import seccionSerializer
 from rest_framework.validators import UniqueValidator
