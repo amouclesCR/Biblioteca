@@ -95,8 +95,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
             'NAME': 'biblioteca',
-            'USER': 'root',
-            'PASSWORD': 'AMBU_DB123',
+            'USER': 'alex',
+            'PASSWORD': '123',
+            #   'USER': 'root',
+            #   'PASSWORD': 'AMBU_DB123',
             'HOST': 'localhost',
             'PORT': '3306',
     }
