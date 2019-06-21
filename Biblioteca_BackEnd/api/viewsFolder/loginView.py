@@ -7,7 +7,7 @@ from django.db.models import Q
 import json
 from django.contrib.auth import authenticate, logout, login
 from rest_framework.views import APIView
-
+from rest_framework_simplejwt.tokens import RefreshToken
 #   REVISA SI EL USUARIO EXISTE PARA REALIZAR EL LOGIN DEL MISMO
 class loginCView (generics.CreateAPIView):
 
@@ -34,6 +34,7 @@ class loginCView (generics.CreateAPIView):
         
         if user:
             login(request, user)
+            #refresh = RefreshToken.for_user(user)
             ser = customSerializer(user, many=False)
         else:
             ser = customSerializer(user, many=True)
