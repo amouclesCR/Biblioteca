@@ -31,7 +31,7 @@ class AMBU_Rol (models.Model):
 class AMBU_CustomeUsuario (AbstractUser):
     pass
     #   ALMACENA LA RELACION DEL ROL
-    cus_rol = models.ForeignKey(AMBU_Rol, on_delete=models.CASCADE)
+    cus_rol = models.ForeignKey(AMBU_Rol, on_delete=models.CASCADE, default=2)
     #   ALMACENA LA IDENTIFICACION DEL USUAIRO
     cus_identificacion = models.CharField(max_length=50, unique=True)
 

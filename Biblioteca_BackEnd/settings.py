@@ -95,8 +95,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
             'NAME': 'biblioteca',
-            'USER': 'root',
-            'PASSWORD': 'AMBU_DB123',
+            'USER': 'alex',
+            'PASSWORD': '123',
+            #   'USER': 'root',
+            #   'PASSWORD': 'AMBU_DB123',
             'HOST': 'localhost',
             'PORT': '3306',
     }
@@ -149,8 +151,8 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:9000'
 )
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=2),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
 

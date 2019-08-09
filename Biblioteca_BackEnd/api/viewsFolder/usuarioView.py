@@ -13,7 +13,7 @@ from rest_framework import status
 class usuarioLView (generics.ListAPIView):
     
     #   CONSULTA
-    queryset = AMBU_CustomeUsuario.objects.all()
+    queryset = AMBU_CustomeUsuario.objects.filter(is_active=1)
 
     #   MAPEA LOS DATOS
     serializer_class = usuarioListSerializer
@@ -74,3 +74,23 @@ class registerCView (generics.CreateAPIView):
 
     #   MAPEA LOS DATOS
     serializer_class = customUserRegisterSerializer
+
+class eliminarUsuario(generics.UpdateAPIView):
+    
+    def put(self, request, *args, **kwargs):
+        
+        #   OBTIENE LA PK DE LA RUTA
+        pk = kwargs.get('pk') 
+
+        #   CONSULTA
+        query = AMBU_CustomeUsuario.objects.get(id=pk)
+
+        # SI EL QUERY NO TIENE DATOS RETORNA ERROR
+        if query is None:
+            return Response("No se ha encontrado el usuario", status=status.HTTP_400_BAD_REQUEST)   
+
+        #   CAMBIA EL ESTADO DEL USUARIO
+        query.is_active = 0
+        #   SE SALVA EL USUARIO
+        query.save()
+        return Response(status=status.HTTP_200_OK)

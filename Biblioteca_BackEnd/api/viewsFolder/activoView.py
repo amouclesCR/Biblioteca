@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 #   LISTA Y LOS CREA LOS ACTIVOS
 class ActivoLCView(generics.ListCreateAPIView):
+    # permission_classes = (IsAuthenticated,)
     #   QUERY DE LA CONSULTA
     queryset = AMBU_Activo.objects.all()
     
